@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- your meta data here -->
+
+    <style>
+        .calculator {
+            display: block;
+            width: 280px;
+            height: 200px;
+            margin: auto;
+            padding: 10px 10px 10px 10px;
+            border-color: black;
+            border-style: solid;
+            background-color: rgb(177, 175, 175);
+        }
+
+        .display {
+            display: block;
+            background-color: rgb(211, 124, 24);
+            margin: 0;
+            width: 100%;
+            height: 20%;
+            border: none;
+            text-align: right;
+            font-size: 35px;
+        }
+
+        .keypad {
+            display: flex;
+            width: 100%;
+            height: cal(100%-10%);
+            justify-content: space-around;
+            align-items: stretch;
+            padding: 5px 0 5px 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            display: flex;
+            width: 25%;
+            height: 30px;
+            text-align: center;
+            justify-content: center;
+            border: 1px solid grey;
+            align-items: center;
+            padding: 15px;
+        }
+
+        button:hover {
+            background-color: rgb(201, 194, 194);
+        }
+
+        /*添加颜色在数字上*/
+
+        .dark {
+            width: 100%;
+            height: 25px;
+            font-size: 10px;
+        }
+    </style>
+    <title>Very Simple Calculator</title>
+</head>
+
+<body>
+    <div class="calculator">
+        <div class="display">
+            0
+        </div>
+        <div class="keypad">
+            <!-- reformat button pad as needed -->
+            <button class="button_num">7</button><button class="button_num">8</button>
+            <button class="button_num">9</button><button class="button_num">-</button><br>
+            <button class="button_num">4</button><button class="button_num">5</button>
+            <button class="button_num">6</button><button class="button_num" >/</button><br>
+            <button class="button_num">1</button><button class="button_num" >2</button>
+            <button class="button_num">3</button><button class="button_num" >*</button><br>
+            <button class="button_num">0</button><button class="button_num">C</button>
+            <button class="button_num">=</button><button class="button_num" >+</button><br>
+            <button class="dark">dark mode</button>
+        </div>
+    </div>
+</body>
+<script>
+    let display = document.querySelector('.display');
+    let buttons = Array.from(document.getElementsByClassName('button_num'));
+    
+
+
+    buttons.map(button => {
+        button.addEventListener('click', (e) => {
+
+
+            switch (e.target.innerText) {
+                case 'C':
+                    display.innerText = '';
+                    break;
+                case '=':
+                    try {
+                        display.innerText = eval(display.innerText);
+                    } catch {
+                        display.innerText = 'Error!';
+                    }
+                    break;
+                case '1':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '2':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '3':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '4':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '5':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '6':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '7':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '8':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '9':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                case '0':
+                    while (display.innerText == '0') {
+                        display.innerText = ''
+                    };
+                default:
+                    display.innerText += e.target.innerText;
+            }
+
+        })
+    })
+
+
+
+
+
+
+</script>
+
+</html>

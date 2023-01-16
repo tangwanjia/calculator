@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Divyansh Verma">
+    <meta name="email" content="verm0127@algonquinlive.com">
+    <style>
+        .calculator {
+            display: block;
+            width: 450px;
+            height: 240px;
+            margin: auto;
+            padding: 10px 10px 10px 10px;
+            border-color: black;
+            border-style: solid;
+            background-color: rgb(177, 175, 175);
+        }
+
+        .display {
+            display: block;
+            background-color: rgb(211, 124, 24);
+            margin: 0;
+            width: 100%;
+            height: 20%;
+            border: none;
+            text-align: right;
+            font-size: 45px;
+        }
+
+        .keypad {
+            display: flex;
+            width: 100%;
+            height: cal(100%-10%);
+            justify-content: space-around;
+            align-items: stretch;
+            padding: 5px 0 5px 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            display: flex;
+            width: 25%;
+            height: 30px;
+            text-align: center;
+            justify-content: center;
+            border: 1px solid grey;
+            align-items: center;
+            padding: 15px;
+        }
+
+        button:hover {
+            background-color: rgb(201, 194, 194);
+        }
+
+        /*添加颜色在数字上*/
+
+        .dark {
+            width: 100%;
+            height: 25px;
+            font-size: 10px;
+        }
+    </style>
+    <title>Very Simple Calculator</title>
+</head>
+
+<body id="body" class="dark">
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <br>
+        <div class="keypad" id="keypad">
+            <button>7</button><button>8</button><button>9</button><button>-</button>
+            <button>4</button><button>5</button><button>6</button><button>/</button>
+            <button>1</button><button>2</button><button>3</button><button>X</button>
+            <button>0</button><button>C</button><button>=</button><button>+</button>
+            <button class="dark">dark mode</button>
+        </div>
+    </div>
+</body>
+<script>
+    const buttons = Array.from(document.querySelector("#keypad").children);
+    buttons.forEach((button) => {
+        button.addEventListener("click", (e) => buttonClicked(e.target.innerText));
+    });
+
+    const display = document.querySelector("#display");
+    var inputNumbers = [];
+    var inputOperations = [];
+    var newNumber = true;
+    var result = 0;
+
+    function buttonClicked(val) {
+        // if clicked clear
+        if (val == "C") {
+            display.innerText = "0";
+            result = 0;
+            inputNumbers = [];
+            inputOperations = [];
+        }
+        // if clicked on a number
+        else if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(val))) {
+            // removing 0 or any initial display value
+            if (newNumber == true) { display.innerText = "" }
+
+            display.innerText += val
+            newNumber = false;
+        }
+        // if clicked on any operation
+        else {
+            // taking inputs and saving them for calculation
+            inputNumbers.push(Number(display.innerText));
+            inputOperations.push(val)
+
+            newNumber = true;
+            display.innerText = getResult();
+
+            // making sure to run a new calculation 
+            // if entered any number without any operator after getting result from pressing "=" 
+            if (val == "=") {
+                inputNumbers = [];
+                inputOperations = [];
+            }
+        }
+    }
+
+    function getResult() {
+
+        result = inputNumbers[0];
+
+        for (let i = 0; i < inputNumbers.length - 1; i++) {
+
+            let num = inputNumbers[i + 1];
+            let op = inputOperations[i];
+
+            if (op == "-") {
+                result = result - num;
+            } else if (op == "/") {
+                result = result / num;
+            } else if (op == "X") {
+                result = result * num;
+            } else if (op == "+") {
+                result = result + num;
+            }
+        }
+
+        console.log(inputNumbers)
+        console.log(inputOperations)
+
+        // Only showing 2 decimal places if numbre is float
+        if (Number.isInteger(result)) return result;
+        else return result.toFixed(2);
+    }
+
+</script>
+
+</html>
